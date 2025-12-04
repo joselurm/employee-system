@@ -1,7 +1,7 @@
 // Definimos la clase base como abstracta para que no se pueda instanciar directamente.
 abstract class Employee(val name: String, salaryInput: Double) {
 
-    // Declaramos salary aqui para poder controlar si mete salario negativo
+    // Declaramos salary aqui para poder controlar si mete salario negativo cuando lo cambian
     var salary: Double = salaryInput
         set(value) {
             // Setter personalizado: se ejecuta cada vez que intentamos cambiar el sueldo
@@ -11,6 +11,12 @@ abstract class Employee(val name: String, salaryInput: Double) {
             } else {
                 field = value
             }
+        }
+     //controlamos que el salario no sea negativo 
+    init {
+        if (salaryInput < 0) {
+            println("Aviso: Se intento crear a $name con salario negativo. Ajustado a 0.0")
+            this.salary = 0.0
         }
     //obligan a los hijos a implementarlos
     abstract fun work()
